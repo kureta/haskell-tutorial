@@ -4,20 +4,20 @@ module FizzBuzz () where
 
 import           Prelude.Unicode
 
+(∘∘) ∷ (Functor f, Functor f1) ⇒ (a → b) → f (f1 a) → f (f1 b)
+(∘∘) = fmap ∘ fmap
+
 (+++) ∷ [String] → [String] → [String]
 (+++) = zipWith (++)
 
-fizzes ∷ [String]
-fizzes = cycle ["", "", "fizz"]
+makeRule ∷ Int → String → [String]
+makeRule num word = cycle (replicate (num - 1) "" ++ [word])
 
-buzzes ∷ [String]
-buzzes = cycle ["", "", "", "", "buzz"]
-
-quiznos ∷ [String]
-quiznos = cycle ["", "", "", "", "", "", "quizno"]
+combineRules ∷ [Int] → [String] → [String]
+combineRules = foldr1 (+++) ∘∘ zipWith makeRule
 
 rules ∷ [String]
-rules = fizzes +++ buzzes +++ quiznos
+rules = combineRules [3, 5, 7] ["fizz", "buzz", "quizno"]
 
 machine ∷ [String]
 machine = zipWith merge rules [1..]
