@@ -7,13 +7,13 @@ import           Test.Hspec.QuickCheck
 
 import           Scratch                   (ourAdd)
 
-main :: IO ()
+main ∷ IO ()
 main = hspec spec
 
-spec :: Spec
+spec ∷ Spec
 spec =
   describe "Scratch" $ do
-    prop "ourAdd is commutative" $ \x y ->
+    prop "ourAdd is commutative" $ \x y →
       ourAdd x y `shouldBe` ourAdd y x
-    prop "Zero is identity" $ \x ->
+    prop "Zero is identity" $ \x →
       ourAdd x 0 `shouldBe` x
