@@ -1,6 +1,8 @@
 {-# LANGUAGE UnicodeSyntax #-}
 
-module Mastermind () where
+module Mastermind (
+                  exactMatches
+                  ) where
 
 import           Control.Applicative (liftA2)
 import           Control.Arrow       (Arrow, (&&&))
