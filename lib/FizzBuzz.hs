@@ -20,7 +20,7 @@ rules ∷ [String]
 rules = combineRules [3, 5, 7] ["fizz", "buzz", "quizno"]
 
 machine ∷ [String]
-machine = zipWith merge rules [1..]
-          where merge word number = if null word
-                                      then show number
-                                      else word
+machine = zipWith insertNums rules [1..]
+          where insertNums word number = if null word
+                                         then show number
+                                         else word
