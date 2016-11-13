@@ -12,8 +12,9 @@ main = hspec spec
 
 spec ∷ Spec
 spec =
-  describe "Scratch" $ do
-    prop "ourAdd is commutative" $ \x y →
-      ourAdd x y `shouldBe` ourAdd y x
-    prop "Zero is identity" $ \x →
-      ourAdd x 0 `shouldBe` x
+  describe "Scratch" $
+    describe "ourAdd" $ do
+      prop "is commutative" $ \x y →
+        ourAdd x y `shouldBe` ourAdd y x
+      prop "has identity 0" $ \x →
+        ourAdd x 0 `shouldBe` x
