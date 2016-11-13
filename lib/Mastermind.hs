@@ -2,6 +2,8 @@
 
 module Mastermind (
                   exactMatches
+                , colorMatches
+                , Color
                   ) where
 
 import           Control.Applicative (liftA2)
