@@ -27,6 +27,8 @@ executable tutorial
 
 library
   exposed-modules:     Scratch
+                     , Mastermind
+                     , FizzBuzz
   build-depends:       base >= 4.9 && < 5
                      , base-unicode-symbols
   hs-source-dirs:      lib
