@@ -42,3 +42,9 @@ p1 = (&&&)
 -- p2 f g = \x y → ((f x y), (g x y))
 p2 ∷ (Arrow a, Applicative f) ⇒ f (a b c) → f (a b c') → f (a b (c, c'))
 p2 = liftA2 (&&&)
+
+addTuple ∷ (Arrow a) ⇒ a (ℤ, ℤ) ℤ
+addTuple = arr (uncurry (+))
+
+addArgs ∷ (Arrow a1, Arrow a2) ⇒ a1 ℤ (a2 ℤ ℤ)
+addArgs = arr (arr ∘ (+))
