@@ -48,3 +48,9 @@ addTuple = arr (uncurry (+))
 
 addArgs ∷ (Arrow a1, Arrow a2) ⇒ a1 ℤ (a2 ℤ ℤ)
 addArgs = arr (arr ∘ (+))
+
+arr2t ∷ (Arrow a0) ⇒ (a → b → c) → a0 (a, b) c
+arr2t = arr ∘ uncurry
+
+arr2a ∷ (Arrow a0, Arrow a1) ⇒ (a → b → c) → a0 a (a1 b c)
+arr2a = arr ∘ (arr ∘)
