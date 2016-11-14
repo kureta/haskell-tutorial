@@ -5,7 +5,7 @@ module Combinators where
 import           Prelude.Unicode
 
 import           Control.Applicative (liftA2, (<*>))
-import           Control.Arrow       (Arrow, (&&&))
+import           Control.Arrow
 import           Data.Function       (on)
 
 -- p = paraller, c = compose, m = f x x
@@ -34,6 +34,10 @@ c2p1m = on
 c2p2 ∷ (Applicative f, Applicative f1) ⇒
      (a → b → c) → f1 (f a) → f1 (f b) → f1 (f c)
 c2p2 = liftA2 ∘ liftA2
+
+-- p1 f g = \x → ((f x), (g x))
+p1 ∷ Arrow a => a b c -> a b c' -> a b (c, c')
+p1 = (&&&)
 
 -- p2 f g = \x y → ((f x y), (g x y))
 p2 ∷ (Arrow a, Applicative f) ⇒ f (a b c) → f (a b c') → f (a b (c, c'))
