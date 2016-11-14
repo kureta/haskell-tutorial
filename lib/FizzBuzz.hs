@@ -2,25 +2,24 @@
 
 module FizzBuzz () where
 
+import           Control.Arrow
 import           Prelude.Unicode
 
-(∘∘) ∷ (Functor f, Functor f1) ⇒ (a → b) → f (f1 a) → f (f1 b)
-(∘∘) = fmap ∘ fmap
+(+^+) ∷ [String] → [String] → [String]
+(+^+) = zipWith (++)
 
-(+++) ∷ [String] → [String] → [String]
-(+++) = zipWith (++)
+makeRule ∷ (Int, String) → [String]
+makeRule = cycle ^<< uncurry (++) ^<< (makeHoles *** (: []))
+           where makeHoles = flip replicate "" ^<< subtract 1
 
-makeRule ∷ Int → String → [String]
-makeRule num word = cycle (replicate (num - 1) "" ++ [word])
+combineRules ∷ [(Int, String)] → [String]
+combineRules = foldr1 (+^+) ^<< map makeRule
 
-combineRules ∷ [Int] → [String] → [String]
-combineRules = foldr1 (+++) ∘∘ zipWith makeRule
+myRules ∷ [String]
+myRules = combineRules [(3, "fizz"), (5, "buzz"), (7, "quizno")]
 
-rules ∷ [String]
-rules = combineRules [3, 5, 7] ["fizz", "buzz", "quizno"]
-
-machine ∷ [String]
-machine = zipWith insertNums rules [1..]
-          where insertNums word number = if null word
+fizzbuzz ∷ [String]
+fizzbuzz = zipWith insertNums myRules [1..]
+           where insertNums word number = if null word
                                          then show number
                                          else word
