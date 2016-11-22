@@ -31,6 +31,7 @@ library
                      , FizzBuzz
   build-depends:       base >= 4.9 && < 5
                      , base-unicode-symbols
+                     , hmt
   hs-source-dirs:      lib
   default-language:    Haskell2010
 
